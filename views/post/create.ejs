@@ -1,0 +1,75 @@
+<%- include('../partials/header'); -%>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('../../public/assets/img/contact-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="page-heading">
+                        <h1>Create Post</h1>
+                        <span class="subheading">Have article? Create </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content-->
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+
+                    <div class="my-5">
+                        <form id="contactForm">
+                            <div class="form-floating">
+                                <input class="form-control" id="createPostTitle" type="text"
+                                    placeholder="Enter title..." data-sb-validations="required" />
+                                <label for="name">Title</label>
+
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" id="createPostSubTitle" type="text"
+                                    placeholder="Enter sub title..." data-sb-validations="required" />
+                                <label for="name">Sub Title</label>
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" id="createPostContent"
+                                    placeholder="Enter your content..." style="height: 12rem"
+                                    data-sb-validations="required"></textarea>
+                                <label for="message">Content</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
+                                </div>
+                            </div>
+                            <br />
+
+                            <!-- Submit Button-->
+                            <a class="btn btn-primary text-uppercase" href="javascript:;"
+                                onclick="createPost()" type="submit">Create</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function createPost() {
+            $.ajax('/post/create', {
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({ "title": $('#createPostTitle').val(), "subTitle": $('#createPostSubTitle').val(), "content": $('#createPostContent').val() }),
+                success: function (data, textStatus, xhr) {
+                    data.message = "Post create successful"
+                    showSuccess($('#registerModal'), data, function () {
+                        setTimeout(() => {
+                            location.reload("/");
+                        }, 1000);
+                    })
+                },
+                error: function (data) {
+                    showError($('#registerModal'), data.responseJSON)
+                }
+            })
+        }
+    </script>
+    <!-- Footer-->
+    <%- include('../partials/footer'); -%>

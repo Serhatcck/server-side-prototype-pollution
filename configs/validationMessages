@@ -1,0 +1,19 @@
+const validationMessages = {
+    invalidEmail: "Invalid Email",
+    emailMustExist: "email must exist",
+    emailIsExist:"email is exist",
+    passwdMinFive: "password must be at least 5 chars long",
+    passwdMaxTwelve: "password must be at max 12 chars long",
+    passwdContainNumber: "password must contain a number",
+    passwdMustExist: "password must exist",
+    postTitleMustExist: "title must exist",
+    postTitleMin: "title must be at least 5 chars long",
+    postTitleMax: "title must be at max 50 chars long",
+    postSubTitleMustExist: "sub title must exist",
+    postSubTitleMin: "sub title must be at least 5 chars long",
+    postSubTitleMax: "sub title must be at max 50 chars long",
+    postContentMustExist: "content must exist",
+    postContentMin: "content must be at least 5 chars long",
+    postContentMax: "content must be at max 2500 chars long",
+}
+module.exports = validationMessages

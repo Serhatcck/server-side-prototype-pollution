@@ -1,0 +1,60 @@
+<!-- Register Modal Start -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="registerModalLabel">register Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="md-form mb-5">
+                    <input type="email" id="registerEmail" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                </div>
+                <div class="md-form mb-5">
+                    <input type="text" id="registerName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your Name</label>
+                </div>
+                <div class="md-form mb-5">
+                    <input type="text" id="registerSurname" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your Surname</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="password" id="registerPasswd" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                </div>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="registerUser()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function registerUser(){
+        $.ajax('/register', {
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({ "email": $('#registerEmail').val(), "name":$('#registerName').val(),"surname":$('#registerName').val(), "passwd": $('#registerPasswd').val() }),
+            success: function (data, textStatus, xhr) {
+                data.message="User create successful"
+                showSuccess($('#registerModal'),data,function(){
+                    setTimeout(() => {
+                        location.reload("/");
+                    }, 1000);
+                })
+            },
+            error: function (data) {
+                showError($('#registerModal'),data.responseJSON)
+            }
+        })
+    }
+</script>
+
+<!-- Register Modal End -->

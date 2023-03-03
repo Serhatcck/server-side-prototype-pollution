@@ -1,0 +1,103 @@
+<%- include('partials/header'); -%>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="page-heading">
+                        <h1>Whoami</h1>
+                        <span class="subheading">My informations:</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content-->
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="my-5">
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <div class="form-floating">
+                                <input class="form-control" id="profileUpdateName" type="text" value="<%=(user.name)%>"
+                                    placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" id="profileUpdateSurname" type="text"
+                                    value="<%=(user.surname)%>" placeholder="Enter your name..."
+                                    data-sb-validations="required" />
+                                <label for="name">Sur Name</label>
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" readonly type="email" value="<%=(user.email)%>"
+                                    placeholder="Enter your email..." data-sb-validations="required,email" />
+                                <label for="email">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" id="profileUpdatePassword" type="password"
+                                    placeholder="Enter your password..." data-sb-validations="required,email" />
+                                <label for="email">Password</label>
+                            </div>
+                            <br />
+                            <!-- Submit success message-->
+                            <!---->
+                            <!-- This is what your users will see when the form-->
+                            <!-- has successfully submitted-->
+                            <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3">
+                                    <div class="fw-bolder">Form submission successful!</div>
+                                    To activate this form, sign up at
+                                    <br />
+                                    <a
+                                        href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                </div>
+                            </div>
+                            <!-- Submit error message-->
+                            <!---->
+                            <!-- This is what your users will see when there is-->
+                            <!-- an error submitting the form-->
+                            <div class="d-none" id="submitErrorMessage">
+                                <div class="text-center text-danger mb-3">Error sending message!</div>
+                            </div>
+                            <!-- Submit Button-->
+                            <a  onclick="submitProfileUpdate()"
+                                class="btn btn-primary text-uppercase">Submit</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function submitProfileUpdate() {
+            $.ajax('/profileUpdate', {
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({ "name": $('#profileUpdateName').val(), "surname": $('#profileUpdateSurname').val(), "passwd": $('#profileUpdatePassword').val() }),
+                success: function (data, textStatus, xhr) {
+                    showSuccess($('#loginModal'), data, function () {
+                        setTimeout(() => {
+                            location.reload("/profile");
+                        }, 1500);
+                    })
+                },
+                error: function (data) {
+                    showError($('#loginModal'), data.responseJSON)
+                }
+            })
+        }
+    </script>
+    <!-- Footer-->
+
+    <%- include('partials/footer'); -%>

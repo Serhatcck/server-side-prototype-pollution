@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nodejs
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    image: sspp/node
+    restart: unless-stopped
+    ports:
+      - 4111:4111
+    environment:
+      - host=mysqldb
+      - user=root
+      - password=root
+      - database=nodejs
+    stdin_open: true
+    tty: true
+volumes:
+  db:
