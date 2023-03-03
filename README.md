@@ -25,10 +25,8 @@ This website has been developed using Nodejs and has a server side prototype pol
 1. ```npm install```
 1. Create MYSQL server
 1. Configure db connection with `configs/db` file or environment value:
-    ```env
-    host
-    user
-    password
-    database
-    ```
+    1. host
+    1. user
+    1. password
+    1. database
 1. Go to ```localhost:4111/install``` (If you change the port and host information manually, you must move accordingly).
