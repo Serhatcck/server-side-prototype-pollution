@@ -13,7 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: sspp/node
+    image: serhatcck/server-side-prototype-pollution
     restart: unless-stopped
     ports:
       - 4111:4111
