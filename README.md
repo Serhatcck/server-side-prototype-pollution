@@ -27,11 +27,11 @@ docker compose -f docker-compose.yml up -d
 ```shell 
 git clone https://github.com/Serhatcck/server-side-prototype-pollution.git
 ```
-1. 
+2. 
 ```shell
 cd server-side-prototype-pollution
 ```
-1. İnstall all packages
+3. İnstall all packages
 ```shell
 npm install
 ```
