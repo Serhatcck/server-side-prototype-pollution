@@ -27,11 +27,11 @@ docker compose -f docker-compose.yml up -d
 ```shell 
 git clone https://github.com/Serhatcck/server-side-prototype-pollution.git
 ```
-1. 
+2. 
 ```shell
 cd server-side-prototype-pollution
 ```
-1. İnstall all packages
+3. İnstall all packages
 ```shell
 npm install
 ```
@@ -46,3 +46,8 @@ npm install
 node app.js
 ```
 1. Go to ```localhost:4111/install``` (If you change the port and host information manually, you must move accordingly).
+    
+## Images
+
+![Server Side Prototype Pollution Web Site.](public/assets/img/home.png "This is a home page.")
+![Server Side Prototype Pollution Web Site.](public/assets/img/create-post.png "This is a post page.")
